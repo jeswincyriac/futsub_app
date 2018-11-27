@@ -1,0 +1,98 @@
+<!DOCTYPE>
+<html>
+	<body background="pexels-photo-1229861 (1).jpeg"></body>
+<head>
+	<title>User channel</title>
+	<style type="text/css">
+		.review{
+			text-align: center;
+			padding-top: 5%;
+			display: block;
+		}
+		#heading{
+			text-align: center;
+			left: 50 px;
+		}
+		#text1{
+			padding-right: 100px;
+			display: block;
+			padding-bottom: 50px;
+		}
+		#text2{
+			padding-right: 100px;
+			display: block;
+			padding-bottom: 50px;
+		}
+		#text3{
+			padding-right: 100px;
+			display: block;
+			padding-bottom: 50px;
+		}
+		.wrapper{
+			padding-top: 50px;
+			padding-right: 80px;
+		}
+		#button{
+			padding-right: 130px;
+			left: 38%;
+			position: absolute;
+			width: 20 em;
+			height: 2 em;
+			display: inline;
+		}
+		#font1{
+			bottom: 30px;
+			right: 30px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<h1 id="heading">Register channel</h1>
+<form class="review">
+	<div id=text1>
+		<h3 id="font1">channel name:</h3>
+		<input type="text" name="name" id="name">
+		</input>
+	</div>
+	<div id="text2">
+		<h3 id="font2">No of subscribers:</h3>
+		<input type="text" name="number" id="channel">
+		</input>
+	</div>
+	<div class="wrapper">
+		<button id="button" onclick="fntion()">Submit</button>
+	</div>
+</form>
+
+<script >
+
+function fntion()
+{
+	console.log("button clicked");
+	var e1 = document.getElementById("name").value;
+    var e2 = document.getElementById("channel").value;
+    fetch('http://localhost:8000/accounts/channelsub/',{
+      method:'post',
+      body:JSON.stringify({"name":e1,
+  	      "number":e2})
+  	  })
+
+    .then((res) => res.json()).then((data) =>
+    {
+
+  	document.getElementById("heading").innerHTML="success";
+
+    }
+  );
+   console.log(e1);
+   console.log(e2);
+
+
+    //console.log(jsonObject);
+    //debugger;
+}
+
+</script>
+</body>
+</html>

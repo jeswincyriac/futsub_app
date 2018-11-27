@@ -5,6 +5,7 @@
 	<title>FUTSUB-Complete Advertaisment Site</title>
 	<a href="http://localhost:8000/accounts/reg/" id=registration >User Registraion</a>
 	<a href="http://localhost:8000/accounts/review/" id="review">User Review</a>
+	<a href="http://localhost:8000/accounts/channel/" id="channel">register channel</a>
 	<style type="text/css">
 		h1 {
 			text-align: center;
@@ -105,6 +106,13 @@
 			right: 30%;
 			font-size: 170%;
 		}
+		#review{
+			position: absolute;
+			bottom: 80%;
+			color: black;
+			right: 90%;
+			font-size: 170%;
+		}
 	</style>
 </head>
 <body>
@@ -113,32 +121,14 @@
 		<form class="channels">
 			<div class="one">
 				<h2>Channel1:
-					<select class ="box1" name="Channel1" id="s1">
-						<option value="pewdiepie">
-							pewdiepie
-						</option>
-						<option value="tseries">
-							T-series
-						</option>
-						<option value="coldplay">
-							coldplay
-						</option>
-					</select>
+					<input class="box1" name="Channel1" id="s1">
+					</input>
 				</h2>
 			</div>
 			<div class="two">
 				<h2>Channel2:
-					<select class="box2" name="Channel2" id="s2">
-						<option value="pewdiepie">
-							pewdiepie
-						</option>
-						<option value="tseries">
-							T-series
-						</option>
-						<option value="coldplay">
-							coldplay
-						</option>
-					</select>
+					<input class="box2" name="Channel2" id="s2">
+					</input>
 				</h2>
 			</div>
 		</form>
@@ -154,10 +144,10 @@
 			    </h3>
 		</form>
 		<form class="yofoll1">
-				<h3 id="textbox3">Channel1 Avg viewers:
+				<h3 id="textbox3">Channel1 Avg rating:
 					{{ no_subs1 }}
 				</h3>
-				<h3 id="textbox4">Channel2 Avg Viewers:
+				<h3 id="textbox4">Channel2 Avg rating:
 				{{ no_subs2 }}
 			    </h3>
 		</form>
@@ -166,17 +156,12 @@
 function fntion()
 {
 	console.log("button clicked");
-	var e1 = document.getElementById("s1");
-    var channel1 = e1.options[e1.selectedIndex].text;
-
-	var e2 = document.getElementById("s2");
-    var channel2 = e2.options[e2.selectedIndex].text;
-    console.log(channel1);
-	console.log(channel2);
+	var e1 = document.getElementById("s1").value;
+	var e2 = document.getElementById("s2").value;
   fetch('http://localhost:8000/accounts/clicked/',{
     method:'post',
-    body:JSON.stringify({"channel1":channel1,
-	      "channel2":channel2})
+    body:JSON.stringify({"channel1":e1,
+	      "channel2":e2})
 	  })
 
   .then((res) => res.json()).then((data) =>
@@ -184,8 +169,8 @@ function fntion()
 
 	document.getElementById("textbox1").innerHTML="Channel 1 Suscribers:"+data["no_subs1"];
 	document.getElementById("textbox2").innerHTML="Channel 2 Suscribers:"+data["no_subs2"];
-    document.getElementById("textbox3").innerHTML="Channel1 Avg viewers:"+data["avg_view1"];
-	document.getElementById("textbox4").innerHTML="Channel2 Avg viewers:"+data["avg_view2"];
+    document.getElementById("textbox3").innerHTML="Channel1 Avg rating:"+data["avg_view1"];
+	document.getElementById("textbox4").innerHTML="Channel2 Avg rating:"+data["avg_view2"];
 
   }
 );

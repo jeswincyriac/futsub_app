@@ -9,5 +9,7 @@ urlpatterns = [
     url(r'regsub/',views.regsub),
     url(r'review/',views.review),
     url(r'reviewsub/',views.reviewsub),
+    url(r'channel/',views.channel),
+    url(r'channelsub/',views.channelsub),
 
 ]
